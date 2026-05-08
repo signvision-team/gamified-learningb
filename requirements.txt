@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pymongo
+python-jose
+passlib[bcrypt]
+python-multipart
+fastapi
+uvicorn
+mysql-connector-python
+pydantic
