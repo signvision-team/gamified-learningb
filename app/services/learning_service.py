@@ -24,7 +24,8 @@ def get_levels(user_id):
             "id": level["id"],
             "title": level["title"],
             "desc": level["description"],
-            "status": status
+            "status": status,
+            "progress": min(100, (user_xp / level["unlock_xp"]) * 100)
         })
 
     return result
@@ -41,3 +42,17 @@ def get_level_content(level_id):
     """, (level_id,))
 
     return cursor.fetchall()
+
+def check_level_unlock(user_xp):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT *
+        FROM levels
+        WHERE unlock_xp <= %s
+        ORDER BY unlock_xp DESC
+        LIMIT 1
+    """, (user_xp,))
+
+    return cursor.fetchone()

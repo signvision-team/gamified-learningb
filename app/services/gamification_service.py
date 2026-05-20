@@ -115,7 +115,10 @@ def process_prediction(data):
 
         return {
             "correct": is_correct,
-            "xp_earned": xp
+            "xp_earned": xp,
+         "total_xp": current_user_xp,   # NEW
+         "level": new_level,           # NEW
+          "streak": streak  
         }
 
     finally:
